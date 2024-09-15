@@ -14,7 +14,7 @@ import { getBitacora } from "../front-extras/helpers/API";
 const getTodayDate = () =>{
   let date = new Date()
   let m = date.getMonth() + 1
-  console.log(m)
+
   let month = (m < 10 ) ? `0${m}` : m
   let d = date.getDate()
   let day = (d < 10 ) ? `0${d}` : d
@@ -40,7 +40,7 @@ export default withPageAuthRequired( function Home() {
         const response = await fetch('/api/getLogs'); // Call the API route
         if (response.ok) {
           const data = await response.json();
-          console.log("Fetched logs:", data); // Log the fetched logs
+          //console.log("Fetched logs:", data); // Log the fetched logs
           setLogs(data);
         } else {
           console.error("Failed to fetch logs");

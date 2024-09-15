@@ -19,7 +19,8 @@ export async function analyzeBitacora( Bitacora, User) {
     console.log(User)
     return API.call("/api/apiGpt", "POST", {
         content: Bitacora.text, 
-        id: User.sid
+        date: Bitacora.date,
+        user: User.sid
     })
 }
 
@@ -29,7 +30,7 @@ export async function saveBitacora(Bitacora, User) {
           title: Bitacora.title,
           date: Bitacora.date,
           content: Bitacora.text,
-          id: User.sid
+          user: User.sid
         }
       )
 
