@@ -4,8 +4,8 @@ import { createContext, useContext, useState } from "react";
 const AppContext = createContext()
 
 const getContext = () =>{
-    let data = localStorage.getItem("user")
-    console.log(data)
+    //let data = localStorage.getItem("user")
+    return {}
 }
 export function AppWrapper({ children }) {
   const [data, setData] = useState({
