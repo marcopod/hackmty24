@@ -42,13 +42,13 @@ export default function EditBitacora({
   };
 
   const handleSaveBitacora = async () => {
+    
     setLoading(true);
     setResponseMessage("");
 
     try {
       // Peticion para analizar con ChatGpt y guardar las emociones
       let emociones = await analyzeBitacora(Bitacora, user)
-      
       // Guardamos lo escrito de la bitacora
       let save = await saveBitacora(Bitacora, user)
 
