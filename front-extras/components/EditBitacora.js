@@ -41,6 +41,31 @@ export default function EditBitacora({
     setResponseMessage("");
 
     try {
+
+      // Obtener el content del formulario
+      const content = Bitacora.text;
+
+      // Solicitud pasando content a GPT
+      const gptResponse = await fetch("/api/apiGpt", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content }), // Pasar content en un objeto
+      });
+      
+      if (!gptResponse.ok) {
+        throw new Error("Error al obtener respuesta de GPT");
+      }
+      
+      const gptData = await gptResponse.json();
+      console.log("Respuesta GPT:", gptData);
+      
+      // Muestra la respuesta de GPT
+      setResponseMessage(`Respuesta de GPT: ${gptData.message}`);
+      
+      // Ahora realizamos la segunda solicitud para guardar en la bitácora
+
       const res = await fetch("/api/createLog", {
         method: "POST",
         headers: {
