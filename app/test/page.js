@@ -3,7 +3,9 @@ import { useState } from 'react';
 
 export default function AddDataPage() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [date, setDate] = useState('');
+  const [content, setContent] = useState('');
+  const [emotions, setEmotions] = useState([])
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState('');
 
@@ -17,7 +19,7 @@ export default function AddDataPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ name, date, content, emotions }),
       });
 
       const data = await res.json();
@@ -28,6 +30,7 @@ export default function AddDataPage() {
         setResponseMessage(`Error: ${data.error}`);
       }
     } catch (error) {
+      console.log("----", error)
       setResponseMessage('An error occurred while adding data.');
     } finally {
       setLoading(false);
@@ -39,15 +42,21 @@ export default function AddDataPage() {
       <h1>Add Data to MongoDB</h1>
       <input
         type="text"
-        placeholder="Name"
+        placeholder="Title"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        type="text"
+        placeholder="Date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Content"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
       />
       <button onClick={handleAddData} disabled={loading}>
         {loading ? 'Adding...' : 'Add Data'}

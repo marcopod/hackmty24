@@ -18,18 +18,18 @@ const getClient = async () => {
 };
 
 export async function POST(request) {
-  const { name, email } = await request.json();
+  const { name, date, content, emotions} = await request.json();
 
-  if (!name || !email) {
+  if (!name || !date || !content || !emotions) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
   try {
     const client = await getClient();
-    const db = client.db('yourDatabase'); // Replace with your database name
-    const collection = db.collection('yourCollection'); // Replace with your collection name
+    const db = client.db('hackMty24'); // Replace with your database name
+    const collection = db.collection('log'); // Replace with your collection name
 
-    const result = await collection.insertOne({ name, email });
+    const result = await collection.insertOne({ name, date, content, emotions });
 
     return NextResponse.json({ success: true, id: result.insertedId });
   } catch (error) {
