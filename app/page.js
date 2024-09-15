@@ -1,17 +1,7 @@
+'use client';
 import TopMenu from "@/front-extras/components/TopMenu";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <>
-    <TopMenu/>
-    <h1>Hola Home</h1>
-    </>
-  );
-}
-
-
-'use client';
 import { useState, useEffect } from 'react';
 
 export default function Home() {
@@ -57,6 +47,8 @@ export default function Home() {
 
   return (
     <div>
+
+    <TopMenu/>
       <h1>Handling Multiple API Requests Example</h1>
 
       {loading ? <p>Loading...</p> : <p>GET Message: {getMessage}</p>}
@@ -64,6 +56,6 @@ export default function Home() {
       <button onClick={handlePostRequest}>Send POST Request</button>
       {postMessage && <p>POST Message: {postMessage}</p>}
     </div>
->>>>>>> 4b28c6d374675c83f3a53fb1c1270e2842b53ed6
+
   );
 }
