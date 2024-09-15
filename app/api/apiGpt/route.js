@@ -8,8 +8,9 @@ const openai = new OpenAI({
 
 export async function POST(request) {
   try {
-    const { content } = await request.json();
-    const { id } = await request.json();
+    const content = await request.json();
+
+    console.log("IDDDDDDDDDDDDDDDD", content.id)
 
     if (!content) {
       return NextResponse.json({ error: 'No content provided' }, { status: 400 });
@@ -43,7 +44,7 @@ export async function POST(request) {
       "emocion": ""
   };
 
-    const mensaje = `Basado en el siguiente diccionario:\n\n${JSON.stringify(emociones, null, 2)}\n ¿Con qué emociones clasificarías el siguiente texto en una sola emoción?: \n ${content} \n Entrega la respuesta en el siguiente formato \n ${JSON.stringify(formato, null, 2)}`;
+    const mensaje = `Basado en el siguiente diccionario:\n\n${JSON.stringify(emociones, null, 2)}\n ¿Con qué emociones clasificarías el siguiente texto en una sola emoción?: \n ${content.content} \n Entrega la respuesta en el siguiente formato \n ${JSON.stringify(formato, null, 2)}`;
 
     console.log(mensaje)
 
@@ -63,12 +64,15 @@ export async function POST(request) {
     const parsedResponse = JSON.parse(messageContent);
     console.log(messageContent);
 
+    console.log("ID", content.id)
+
     const result = await collection.insertOne({
-        id: id,
+        id: content.id,
         emociones: parsedResponse});
 
     console.log(result.insertedId);
 
+    
     return NextResponse.json({ message: parsedResponse, insertedId: result.insertedId });
     } catch (error) {
       console.log("Error");
