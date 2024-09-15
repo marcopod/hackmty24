@@ -17,7 +17,7 @@ const API = {
 
 export async function analyzeBitacora( Bitacora, User) {
     return API.call("/api/apiGpt", "POST", {
-        content: Bitacora.content, 
+        content: Bitacora.text, 
         id: User.sid
     })
 }
