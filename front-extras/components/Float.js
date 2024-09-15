@@ -22,7 +22,7 @@ export default function Float({
         <div className="p-4 bg-body rounded-4 shadow h-100">
             <div className="d-flex justify-content-end">
                 <div className="p-3" onClick={close}>
-                    <i class="bi bi-x text-danger fs-2"></i>
+                    <i className="bi bi-x text-danger fs-2"></i>
                 </div>
             </div>
             <Bitacora bitacora={bitacora}/>
