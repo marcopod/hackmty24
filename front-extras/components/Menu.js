@@ -22,9 +22,9 @@ export default function Menu() {
         ">
             
             
-            <Link className="nav-link fs-5 m-3" href={"/bitacoras"}>
+            {/* <Link className="nav-link fs-5 m-3" href={"/bitacoras"}>
                 <i className="bi bi-journal-bookmark"></i>
-            </Link>
+            </Link> */}
             <Link className="nav-link fs-5 m-3" href={"/"}>
                 <i className="bi bi-house"></i>
             </Link>

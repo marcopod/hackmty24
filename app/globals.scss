@@ -77,3 +77,15 @@ $input-border-radius: 0px;
 .bg-transparent{
  background: transparent;
 }
+
+.t-overflow-e{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.mw-100{
+    max-width: 100%;
+}
