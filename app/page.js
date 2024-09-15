@@ -42,6 +42,7 @@ export default withPageAuthRequired( function Home() {
           const data = await response.json();
           //console.log("Fetched logs:", data); // Log the fetched logs
           setLogs(data);
+
         } else {
           console.error("Failed to fetch logs");
         }
