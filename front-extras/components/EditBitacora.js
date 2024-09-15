@@ -65,7 +65,7 @@ export default function EditBitacora({
   };
 
   return (
-    <div className="my-5 p-3">
+    <div className="mt-2 mb-5 p-3">
       <input
         type="text"
         placeholder="Comienza a escribir tu historia..."
