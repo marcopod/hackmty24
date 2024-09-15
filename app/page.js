@@ -39,7 +39,6 @@ export default withPageAuthRequired( function Home() {
 
   return (
     <div>
-      
       {(Selected!= null) && <Float bitacora={Selected} close={()=>setSelected(null)}/>}
 
       <TopMenu />
