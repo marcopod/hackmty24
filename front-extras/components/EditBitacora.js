@@ -48,9 +48,10 @@ export default function EditBitacora({
     try {
       // Peticion para analizar con ChatGpt y guardar las emociones
       let emociones = await analyzeBitacora(Bitacora, user)
+      
       // Guardamos lo escrito de la bitacora
       let save = await saveBitacora(Bitacora, user)
-      
+
       setResponseMessage(`La bitácora se actualizó correctamente`);
     } catch (error) {
       setResponseMessage("Ocurrió un error actualizando la bitacora.");
