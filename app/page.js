@@ -60,6 +60,7 @@ export default withPageAuthRequired( function Home() {
     let log = await getBitacora(user, getTodayDate())
     setTodayLog(log)
   }
+  //TEST
   return (
     <div>
       {(Selected!= null) && <Float bitacora={Selected} close={()=>setSelected(null)}/>}
