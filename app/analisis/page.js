@@ -28,7 +28,7 @@ export default function Analisis() {
     
     return <>
         <TopMenu/>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', border: '0'}}>
             {
                 Theme != null  && 
                 <iframe 
