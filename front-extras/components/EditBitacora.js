@@ -13,8 +13,7 @@ const formatToDMY = (dateStr) => {
 
 export default function EditBitacora({
   bitacora = {
-    id: "123",
-    name: "Bitacora 1",
+    title: "Bitacora 1",
     text: "texto de prueba",
     date: formatToDMY(new Date()), // Set the date to today's date in DD-MM-YYYY format
   },
@@ -26,7 +25,7 @@ export default function EditBitacora({
   const changeName = (e) => {
     let value = e.target.value;
     setBitacora((prev) => {
-      return { ...prev, name: value };
+      return { ...prev, title: value };
     });
   };
 
@@ -42,13 +41,13 @@ export default function EditBitacora({
     setResponseMessage("");
 
     try {
-      const res = await fetch("/api/createBitacora", {
+      const res = await fetch("/api/createLog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: Bitacora.name,
+          name: Bitacora.title,
           date: Bitacora.date,
           content: Bitacora.text,
         }),
@@ -69,7 +68,7 @@ export default function EditBitacora({
       <input
         type="text"
         className="bitacora-title form-control bg-transparent border-0 fs-1 fw-bold"
-        defaultValue={Bitacora.name}
+        defaultValue={Bitacora.title}
         onChange={(e) => changeName(e)}
       />
 
