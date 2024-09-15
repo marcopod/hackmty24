@@ -1,4 +1,5 @@
 // app/api/apiGpt/route.js
+import { MongoClient } from 'mongodb';
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
@@ -6,11 +7,30 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY, // Asegúrate de que tu API Key esté en tu archivo .env.local
 });
 
+let client;
+const uri = process.env.MONGODB_URI;
+
+if (!uri) {
+  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
+}
+
+const getClient = async () => {
+  if (!client) {
+    client = new MongoClient(uri);
+    await client.connect();
+  }
+  return client;
+};
+
 export async function POST(request) {
   try {
     const content = await request.json();
+    //Data
+    // .user = id del usuario
+    // .date = fecha del documento
+    // .content = contenido del documento
 
-    console.log("IDDDDDDDDDDDDDDDD", content.id)
+    console.log("IDDDDDDDDDDDDDDDD", content.user)
 
     if (!content) {
       return NextResponse.json({ error: 'No content provided' }, { status: 400 });
@@ -58,23 +78,32 @@ export async function POST(request) {
     const messageContent = response.choices[0].message.content;
 
     try {
-    const client = await getClient();
-    const db = client.db('hackMty24');
-    const collection = db.collection('log');
-    const parsedResponse = JSON.parse(messageContent);
-    console.log(messageContent);
+      // Procedimiento para insertar un nuevo registro de emociones
+      // console.log("PROBANDO")
+      // console.log("1")
+      const client = await getClient(); //Llamamos API Mongo
+      // console.log("2")
+      const db = client.db('hackMty24'); // Seleccionamos DB
+      // console.log("3")
+      const collection = db.collection('log'); // Select collection
+      // console.log("4")
+      const parsedResponse = JSON.parse(messageContent);
+      // console.log(parsedResponse)
+      // console.log("5")
+      const result = await collection.insertOne(
+        {
+          user: content.user,
+          date: content.date,
+          emociones: parsedResponse
+        }
+      );
 
-    console.log("ID", content.id)
-
-    const result = await collection.insertOne({
-        id: content.id,
-        emociones: parsedResponse});
-
-    console.log(result.insertedId);
-
-    
-    return NextResponse.json({ message: parsedResponse, insertedId: result.insertedId });
-    } catch (error) {
+      return NextResponse.json({ message: parsedResponse, insertedId: result.insertedId });
+    } 
+    catch (error) 
+    {
+      // En caso que no se hayan generado emociones o el prompt regresara algo invalido 
+      // no se guarda el registro de las emociones
       console.log("Error");
       return NextResponse.json({});
     }

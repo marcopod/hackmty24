@@ -15,7 +15,7 @@ export default function Float({
         w-100
         h-100
         bg-dark
-        p-5
+        p-4 p-md-5
         bg-opacity-10
     "
     >   

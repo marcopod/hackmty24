@@ -25,7 +25,8 @@ export async function GET() {
     const collection = db.collection('log'); // Replace with your collection name
 
     // Retrieve all documents from the log collection
-    const logs = await collection.find({}).toArray();
+    //const logs = await collection.find({}).toArray();
+    const logs = await collection.find({ x: { $exists: true } }).toArray();
 
     return NextResponse.json(logs, { status: 200 });
   } catch (error) {

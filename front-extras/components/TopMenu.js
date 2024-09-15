@@ -48,7 +48,7 @@ export default function TopMenu() {
 
 
   return (
-    <div className='navbar navbar-collapse d-flex justify-content-between m-3 p-0 bg-body  rounded-pill position-relative sticky-top' >
+    <div className='navbar navbar-collapse d-flex justify-content-between m-3 p-0 bg-body  rounded-pill position-relative ' >
       {/* Este div solo es de espaciado */}
       <div className='col-md-1 col-xl-2'></div>
 

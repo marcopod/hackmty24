@@ -13,16 +13,10 @@ const formatToDMY = (dateStr) => {
   return `${day}/${month}/${year}`;
 };
 
-export default function EditBitacora({
-  bitacora = {
-    id: "",
-    title: "Bitacora 1",
-    content: "texto de prueba",
-    date: formatToDMY(new Date()), // Set the date to today's date in DD-MM-YYYY format
-  },
-}) {
-  const { user, error, isLoading } = useUser();
 
+export default function EditBitacora({bitacora}) {
+
+  const { user, error, isLoading } = useUser()
   const [Bitacora, setBitacora] = useState(bitacora);
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
@@ -68,7 +62,7 @@ export default function EditBitacora({
   const changeText = (e) => {
     let value = e.target.value;
     setBitacora((prev) => {
-      return { ...prev, text: value };
+      return { ...prev, content: value };
     });
   };
 
@@ -131,22 +125,25 @@ export default function EditBitacora({
 
 
   return (
-    <div className="my-5 p-3">
+    <div className="mt-2 mb-5 p-3">
       <input
         type="text"
+        placeholder="Comienza a escribir tu historia..."
         className="bitacora-title form-control bg-transparent border-0 fs-1 fw-bold"
-        value={Bitacora.title} // Use value instead of defaultValue for controlled component
+        defaultValue={Bitacora?.title}
         onChange={(e) => changeName(e)}
+
       />
 
       <hr />
       {/* Display the date, but don't allow changing it */}
       <div className="d-flex justify-content-end">
-        <span className="d-inline mx-3">{Bitacora.date}</span>
+        <span className="d-inline mx-3">{formatToDMY(new Date())}</span>
       </div>
 
       <textarea
-        value={Bitacora.text} // Use value instead of defaultValue for controlled component
+        defaultValue={Bitacora?.content}
+        placeholder="¿Cómo estuvo tu día?"
         className="vh-50 my-3 rounded-2 p-4 w-100 bg-body-tertiary border-0 rounded-4"
         onChange={(e) => changeText(e)}
       />
