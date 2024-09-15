@@ -32,7 +32,7 @@ export default function Analisis() {
             {
                 Theme != null  && 
                 <iframe 
-                    src={`https://appgraph-fp8hj5wlmf7mje4qfkwkja.streamlit.app/?embed=true&theme=${theme}`} // Usar la variable theme en la URL
+                    src={`https://appgraph-fp8hj5wlmf7mje4qfkwkja.streamlit.app/?embed=true&theme=ligth`} // Usar la variable theme en la URL${theme}
                     style={{ width: '100%', height: '100%', border: 'none' }}>
                 </iframe>
             }
