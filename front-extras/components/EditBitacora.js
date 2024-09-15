@@ -41,6 +41,29 @@ export default function EditBitacora({
     setResponseMessage("");
 
     try {
+      // Obtener el content del formulario
+      const content = Bitacora.text;
+
+      // Solicitud pasando content a GPT
+      const gptResponse = await fetch("/api/apiGpt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content }), // Pasar content en un objeto
+      });
+
+      if (!gptResponse.ok) {
+        throw new Error("Error al obtener respuesta de GPT");
+      }
+
+      const gptData = await gptResponse.json();
+      console.log("Respuesta GPT:", gptData);
+
+      // Muestra la respuesta de GPT
+      setResponseMessage(`Respuesta de GPT: ${gptData.message}`);
+
+      // Ahora realizamos la segunda solicitud para guardar en la bitácora
       const res = await fetch("/api/createLog", {
         method: "POST",
         headers: {
@@ -53,11 +76,16 @@ export default function EditBitacora({
         }),
       });
 
+      if (!res.ok) {
+        throw new Error("Error al guardar la bitácora");
+      }
+
       const data = await res.json();
+      console.log("Bitácora guardada con éxito", data);
 
       setResponseMessage(`La bitácora se actualizó correctamente`);
     } catch (error) {
-      setResponseMessage("Ocurrió un error actualizando la bitacora.");
+      setResponseMessage("Ocurrió un error: " + error.message);
     } finally {
       setLoading(false);
     }
@@ -73,7 +101,7 @@ export default function EditBitacora({
       />
 
       <hr />
-      {/* Display the date, but don't allow changing it */}
+      {/* Mostrar la fecha pero no permitir cambiarla */}
       <div className="d-flex justify-content-end">
         <span className="d-inline mx-3">{Bitacora.date}</span>
       </div>
