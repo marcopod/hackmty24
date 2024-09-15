@@ -33,7 +33,7 @@ export default function EditBitacora({bitacora}) {
   const changeText = (e) => {
     let value = e.target.value;
     setBitacora((prev) => {
-      return { ...prev, text: value };
+      return { ...prev, content: value };
     });
   };
 
