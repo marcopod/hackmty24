@@ -9,6 +9,7 @@ export default function Menu() {
       className="
         fixed-bottom
         d-flex
+        
         justify-content-center
         p-3
     "   
@@ -17,6 +18,7 @@ export default function Menu() {
             rounded-5
             px-5 py-3
             bg-body-tertiary
+            shadow
         ">
             
             
