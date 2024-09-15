@@ -14,23 +14,14 @@ const formatToDMY = (dateStr) => {
   return `${day}/${month}/${year}`;
 };
 
-export default function EditBitacora({
-  bitacora 
-}) {
+
+export default function EditBitacora({bitacora}) {
+
   const { user, error, isLoading } = useUser()
-  
-  const [Bitacora, setBitacora] = useState(bitacora != null ?  bitacora :
-    {
-    title: "",
-    text: "",
-    date: formatToDMY(new Date()),
-    id: ""
-    // Set the date to today's date in DD-MM-YYYY format
-  });
+  const [Bitacora, setBitacora] = useState(bitacora);
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
-
-  const [Response, setResponse] = useState({})
+  //const [Response, setResponse] = useState({})
 
   const changeName = (e) => {
     let value = e.target.value;
@@ -70,7 +61,7 @@ export default function EditBitacora({
         type="text"
         placeholder="Comienza a escribir tu historia..."
         className="bitacora-title form-control bg-transparent border-0 fs-1 fw-bold"
-        defaultValue={Bitacora.title}
+        defaultValue={Bitacora?.title}
         onChange={(e) => changeName(e)}
 
       />
@@ -78,11 +69,11 @@ export default function EditBitacora({
       <hr />
       {/* Display the date, but don't allow changing it */}
       <div className="d-flex justify-content-end">
-        <span className="d-inline mx-3">{Bitacora.date}</span>
+        <span className="d-inline mx-3">{formatToDMY(new Date())}</span>
       </div>
 
       <textarea
-        defaultValue={Bitacora.text}
+        defaultValue={Bitacora?.content}
         placeholder="¿Cómo estuvo tu día?"
         className="vh-50 my-3 rounded-2 p-4 w-100 bg-body-tertiary border-0 rounded-4"
         onChange={(e) => changeText(e)}

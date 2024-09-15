@@ -27,7 +27,7 @@ export async function POST(request) {
     const collection = db.collection('log'); // Replace with your collection name
 
     // Find the last document with the same id and date
-    const log = await collection.findOne({ user: data.id, date: data.date });
+    const log = await collection.findOne({ user: data.user, date: data.date });
 
     return NextResponse.json(log, { status: 200 });
   } 
