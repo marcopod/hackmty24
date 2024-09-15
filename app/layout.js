@@ -1,5 +1,5 @@
 
-import { AppWrapper } from "@/front-extras/helpers/Context";
+import { AppWrapper } from "../front-extras/helpers/Context";
 import "./globals.scss";
 
 export const metadata = {
