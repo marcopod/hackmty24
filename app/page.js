@@ -37,6 +37,7 @@ export default withPageAuthRequired( function Home() {
 
   return (
     <div>
+      
       <TopMenu />
 
       <EditBitacora />
