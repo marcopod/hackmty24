@@ -33,7 +33,7 @@ export default function Bitacora ({
     }
     return <div className="
  
-        my-5
+        mb-5
         p-3
     ">
         
