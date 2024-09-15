@@ -44,6 +44,7 @@ export default function Home() {
 
   return (
     <div>
+      TEST
       <h1>Handling Multiple API Requests Example</h1>
 
       {loading ? <p>Loading...</p> : <p>GET Message: {getMessage}</p>}
