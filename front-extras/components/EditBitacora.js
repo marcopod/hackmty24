@@ -7,7 +7,7 @@ export default function EditBitacora ({
         id: "123",
         name: "Bitacora 1",
         text: "texto de prueba",
-        fecha: "",
+        date: "12-10-2024",
     }
 }) {
 
@@ -28,8 +28,28 @@ export default function EditBitacora ({
         })
     }
 
-    const action = () =>{
+    const changeDate = (e) => {
+        let value = e.target.value
+        console.log(value)
+        setBitacora((prev) => {
+            prev.date = formatToDMY(value)
+            return prev
+        })
+    }
 
+    
+    const formatToDMY = (dateStr) => {
+        const [year, month, day] = dateStr.split('-');
+        let newDate = `${day}-${month}-${year}`;
+        return newDate;
+    }
+    const formatToYMD = (dateStr) => {
+        const [day, month, year] = dateStr.split('-');
+        let newDate = `${year}-${month}-${day}`;
+        return newDate;
+    }
+    const action = () =>{
+        console.log(Bitacora)
     }
     return <div className="
  
@@ -46,7 +66,12 @@ export default function EditBitacora ({
         
         <hr/> 
        <div className="d-flex justify-content-end">
-            <input type="date" className=" d-inline  border-none bg-transparent border-0  mx-3"/>
+            <input 
+                type="date" 
+                defaultValue={formatToYMD(Bitacora.date)}
+                className=" d-inline  border-none bg-transparent border-0  mx-3"
+                onChange={(e) => changeDate(e)}
+            />
         </div>
 
         <textarea 
