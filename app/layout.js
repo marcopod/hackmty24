@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <AppWrapper>
       <html lang="en">
-      <body className={""}>
+      <body className="container">
         {children}
 
       </body>

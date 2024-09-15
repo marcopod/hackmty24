@@ -1,4 +1,5 @@
 'use client';
+import Menu from "../front-extras/components/Menu";
 import TopMenu from "../front-extras/components/TopMenu";
 import Image from "next/image";
 
@@ -55,7 +56,10 @@ export default function Home() {
 
       <button onClick={handlePostRequest}>Send POST Request</button>
       {postMessage && <p>POST Message: {postMessage}</p>}
+      
+    <Menu/>
     </div>
+    
 
   );
 }

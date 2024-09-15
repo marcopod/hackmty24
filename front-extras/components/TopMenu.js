@@ -65,10 +65,10 @@ export default function TopMenu() {
 
 
               <i className="bi bi-person-circle fs-1"></i>
-              <p>{token.email}</p>
+              <p>Nombre usuario</p>
               <button onClick={() => {
                 window.localStorage.clear()
-                navigate("/Auth")
+                //navigate("/Auth")
               }}
                 className='btn btn-danger py-1 '
               > Cerrar sesión</button>
@@ -92,13 +92,6 @@ export default function TopMenu() {
               <div className='py-1' onClick={() => selectTheme('dark')}>
                 <i className="bi bi-moon-stars-fill" ></i> Oscuro
               </div>
-              <div className='py-1' onClick={() => selectTheme('color')}>
-                <i className="bi bi-palette-fill" ></i> Color
-              </div>
-              <div className='py-1' onClick={() => selectTheme('gray')}>
-                <i className="bi bi-shadows"></i> Grises
-              </div>
-
             </div>
           }
         </div>
