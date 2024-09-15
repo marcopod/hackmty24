@@ -1,5 +1,6 @@
 "use client";
-
+import {analyzeBitacora, saveBitacora} from "../helpers/API"
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { useState } from "react";
 
 // Utility function to format a Date object or date string to DD-MM-YYYY
@@ -18,9 +19,13 @@ export default function EditBitacora({
     date: formatToDMY(new Date()), // Set the date to today's date in DD-MM-YYYY format
   },
 }) {
+  const { user, error, isLoading } = useUser()
+  
   const [Bitacora, setBitacora] = useState(bitacora);
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+
+  const [Response, setResponse] = useState({})
 
   const changeName = (e) => {
     let value = e.target.value;
@@ -41,45 +46,11 @@ export default function EditBitacora({
     setResponseMessage("");
 
     try {
-
-      // Obtener el content del formulario
-      const content = Bitacora.text;
-
-      // Solicitud pasando content a GPT
-      const gptResponse = await fetch("/api/apiGpt", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ content }), // Pasar content en un objeto
-      });
+      // Peticion para analizar con ChatGpt y guardar las emociones
+      let emociones = await analyzeBitacora(Bitacora, user)
+      // Guardamos lo escrito de la bitacora
+      let save = await saveBitacora(Bitacora, user)
       
-      if (!gptResponse.ok) {
-        throw new Error("Error al obtener respuesta de GPT");
-      }
-      
-      const gptData = await gptResponse.json();
-      console.log("Respuesta GPT:", gptData);
-      
-      // Muestra la respuesta de GPT
-      setResponseMessage(`Respuesta de GPT: ${gptData.message}`);
-      
-      // Ahora realizamos la segunda solicitud para guardar en la bitácora
-
-      const res = await fetch("/api/createLog", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: Bitacora.title,
-          date: Bitacora.date,
-          content: Bitacora.text,
-        }),
-      });
-
-      const data = await res.json();
-
       setResponseMessage(`La bitácora se actualizó correctamente`);
     } catch (error) {
       setResponseMessage("Ocurrió un error actualizando la bitacora.");
