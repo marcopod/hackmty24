@@ -6,6 +6,7 @@ import TopMenu from "../../front-extras/components/TopMenu";
 import { getPreferredTheme } from "../../front-extras/helpers/Theme";
 
 export default function Analisis() {
+    let theme = getPreferredTheme(); // Obtener el tema preferido
     const fetchLogs = async () => {
         try {
           const response = await fetch('/api/getLogs'); // Update with your actual API route

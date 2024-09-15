@@ -1,6 +1,6 @@
 {
-    "name": "MicelIA",
-    "short_name": "MicelIA",
+    "name": "HistorIA",
+    "short_name": "HistorIA",
     "description": "Día con día escribe tus experiencias",
     "start_url": "/",
     "display": "standalone",

@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useAppContext } from '../helpers/Context'
 import { getPreferredTheme, setStoredTheme, setTheme } from '../helpers/Theme'
+import UsuarioInfo from './UsuarioInfo';
 
 export default function TopMenu() {
 
@@ -58,24 +59,7 @@ export default function TopMenu() {
             <i className="bi bi-person-circle"></i>
           </div>
 
-          {ShowE &&
-            <div className='
-              z-3 p-3 shadow rounded-4 position-absolute top-100 end-0 bg-body d-flex flex-column align-items-center'
-              ref={element1}>
-
-
-              <i className="bi bi-person-circle fs-1"></i>
-              <p>Nombre usuario</p>
-              <button onClick={() => {
-                window.localStorage.clear()
-                //navigate("/Auth")
-              }}
-                className='btn btn-danger py-1 '
-              > Cerrar sesión</button>
-
-
-            </div>
-          }
+          {ShowE && <UsuarioInfo/> }
         </div>
 
         <div className=''>
