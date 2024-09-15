@@ -1,9 +1,11 @@
 "use client";
+
 import {analyzeBitacora, saveBitacora} from "../helpers/API"
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useState } from "react";
 
 // Utility function to format a Date object or date string to DD-MM-YYYY
+
 const formatToDMY = (dateStr) => {
   const date = new Date(dateStr);
   const day = String(date.getDate()).padStart(2, "0");
@@ -51,7 +53,6 @@ export default function EditBitacora({
       let emociones = await analyzeBitacora(Bitacora, user)
       // Guardamos lo escrito de la bitacora
       let save = await saveBitacora(Bitacora, user)
-
       setResponseMessage(`La bitácora se actualizó correctamente`);
     } catch (error) {
       setResponseMessage("Ocurrió un error actualizando la bitacora.");
