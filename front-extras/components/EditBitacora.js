@@ -14,7 +14,7 @@ const formatToDMY = (dateStr) => {
 };
 
 
-export default function EditBitacora({bitacora}) {
+export default function EditBitacora({bitacora, onClick= ()=>{}}) {
 
   const { user, error, isLoading } = useUser()
   const [Bitacora, setBitacora] = useState(bitacora);
@@ -93,9 +93,10 @@ export default function EditBitacora({bitacora}) {
   //     setLoading(false);
   //   }
   // };
-  const handleSaveBitacora = async () => {
+  const handleSaveBitacora = async (bitacora) => {
     setLoading(true);
     setResponseMessage("");
+    onClick(bitacora)
   
     try {
       // Create a new entry by sending a POST request with Bitacora data
@@ -190,7 +191,7 @@ export default function EditBitacora({bitacora}) {
       <div className="w-100 d-flex justify-content-end">
         <button
           className="btn btn-primary"
-          onClick={handleSaveBitacora}
+          onClick={()=>handleSaveBitacora(Bitacora)}
           disabled={loading}
         >
           {loading ? "Saving..." : isExistingEntry ? "Editar Bitácora" : "Guardar Bitácora"}

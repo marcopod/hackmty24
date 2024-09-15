@@ -66,7 +66,13 @@ export default withPageAuthRequired( function Home() {
       {(Selected!= null) && <Float bitacora={Selected} close={()=>setSelected(null)}/>}
 
       <TopMenu />
-      <EditBitacora bitacora={TodayLog}/>
+      <EditBitacora bitacora={TodayLog} onClick = {(e)=> {
+        setLogs((prev)=>{
+          let a = prev
+          a.unshift(e)
+          return a
+        })
+      }}/>
 
       {loading ? (
         <p>Loading...</p>
