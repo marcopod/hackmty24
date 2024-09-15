@@ -9,6 +9,7 @@ const openai = new OpenAI({
 export async function POST(request) {
   try {
     const { content } = await request.json();
+    const { id } = await request.json();
 
     if (!content) {
       return NextResponse.json({ error: 'No content provided' }, { status: 400 });
@@ -56,9 +57,19 @@ export async function POST(request) {
     const messageContent = response.choices[0].message.content;
 
     try {
-      const parsedResponse = JSON.parse(messageContent);
-      console.log(messageContent);
-      return NextResponse.json({ message: parsedResponse });
+    const client = await getClient();
+    const db = client.db('hackMty24');
+    const collection = db.collection('log');
+    const parsedResponse = JSON.parse(messageContent);
+    console.log(messageContent);
+
+    const result = await collection.insertOne({
+        id: id,
+        emociones: parsedResponse});
+
+    console.log(result.insertedId);
+
+    return NextResponse.json({ message: parsedResponse, insertedId: result.insertedId });
     } catch (error) {
       console.log("Error");
       return NextResponse.json({});
