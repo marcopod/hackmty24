@@ -13,7 +13,6 @@ const formatToDMY = (dateStr) => {
 
 export default function EditBitacora({
   bitacora = {
-    id: "123",
     name: "Bitacora 1",
     text: "texto de prueba",
     date: formatToDMY(new Date()), // Set the date to today's date in DD-MM-YYYY format
@@ -42,7 +41,7 @@ export default function EditBitacora({
     setResponseMessage("");
 
     try {
-      const res = await fetch("/api/createBitacora", {
+      const res = await fetch("/api/createLog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
