@@ -32,7 +32,8 @@ $btn-border-radius: 300px;
 
 //Input
 $input-padding-x: 1.5rem;
-$input-border-radius: 300px;
+$input-border-radius: 0px;
+// $input-border-width:  0px;
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
 @import "node_modules/bootstrap/scss/variables";
@@ -64,3 +65,15 @@ $input-border-radius: 300px;
 
 // Bootstrap icons
 @import "node_modules/bootstrap-icons/font/bootstrap-icons";
+
+
+
+//Extra code
+
+.vh-50 {
+ height: 50vh;
+}
+
+.bg-transparent{
+ background: transparent;
+}

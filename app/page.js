@@ -1,4 +1,6 @@
 'use client';
+import EditBitacora from "../front-extras/components/EditBitacora";
+import Bitacora from "../front-extras/components/Bitacora";
 import Menu from "../front-extras/components/Menu";
 import TopMenu from "../front-extras/components/TopMenu";
 import Image from "next/image";
@@ -49,15 +51,26 @@ export default function Home() {
   return (
     <div>
 
-    <TopMenu/>
-      <h1>Handling Multiple API Requests Example</h1>
+      <TopMenu/>
 
-      {loading ? <p>Loading...</p> : <p>GET Message: {getMessage}</p>}
+      <EditBitacora/>
+      <Bitacora/>
+      <Bitacora/>
+      <Bitacora/>
+      <Bitacora/>
+      <Bitacora/>
+      <Bitacora/>
+      <Bitacora/>
 
-      <button onClick={handlePostRequest}>Send POST Request</button>
-      {postMessage && <p>POST Message: {postMessage}</p>}
-      
-    <Menu/>
+
+        <h1>Handling Multiple API Requests Example</h1>
+
+        {loading ? <p>Loading...</p> : <p>GET Message: {getMessage}</p>}
+
+        <button onClick={handlePostRequest}>Send POST Request</button>
+        {postMessage && <p>POST Message: {postMessage}</p>}
+        
+      <Menu/>
     </div>
     
 
