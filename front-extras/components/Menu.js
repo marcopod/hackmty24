@@ -23,13 +23,13 @@ export default function Menu() {
             
             
             <Link className="nav-link fs-5 m-3" href={"/bitacoras"}>
-                <i class="bi bi-journal-bookmark"></i>
+                <i className="bi bi-journal-bookmark"></i>
             </Link>
             <Link className="nav-link fs-5 m-3" href={"/"}>
-                <i class="bi bi-house"></i>
+                <i className="bi bi-house"></i>
             </Link>
             <Link className="nav-link fs-5 m-3" href={"/analisis"}>
-                <i class="bi bi-bar-chart"></i>
+                <i className="bi bi-bar-chart"></i>
             </Link>
             
         </div>
@@ -48,13 +48,13 @@ export default function Menu() {
       >
         <div className="col-12 col-md-8 col-xl-6 d-flex justify-content-between ">
           <Link className="nav-link fs-5" href={"/"}>
-            <i class="bi bi-house-door-fill"></i>
+            <i className="bi bi-house-door-fill"></i>
           </Link>
           <Link className="nav-link fs-5" href={"/calendar"}>
-            <i class="bi bi-calendar3-week-fill"></i>
+            <i className="bi bi-calendar3-week-fill"></i>
           </Link>
           <Link className="nav-link fs-5" href={"/pomodoro"}>
-            <i class="bi bi-stopwatch-fill"></i>
+            <i className="bi bi-stopwatch-fill"></i>
           </Link>
         </div>
       </div> */
