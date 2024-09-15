@@ -2,12 +2,21 @@
 
 import { useState } from "react";
 
+// Utility function to format a Date object or date string to DD-MM-YYYY
+const formatToDMY = (dateStr) => {
+  const date = new Date(dateStr);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+
 export default function EditBitacora({
   bitacora = {
     id: "123",
     name: "Bitacora 1",
     text: "texto de prueba",
-    date: "12-10-2024",
+    date: formatToDMY(new Date()), // Set the date to today's date in DD-MM-YYYY format
   },
 }) {
   const [Bitacora, setBitacora] = useState(bitacora);
@@ -28,30 +37,12 @@ export default function EditBitacora({
     });
   };
 
-  const changeDate = (e) => {
-    let value = e.target.value;
-    setBitacora((prev) => {
-      return { ...prev, date: formatToDMY(value) };
-    });
-  };
-
-
-  const formatToDMY = (dateStr) => {
-    const [year, month, day] = dateStr.split("-");
-    return `${day}-${month}-${year}`;
-  };
-
-  const formatToYMD = (dateStr) => {
-    const [day, month, year] = dateStr.split("-");
-    return `${year}-${month}-${day}`;
-  };
-
   const handleSaveBitacora = async () => {
     setLoading(true);
     setResponseMessage("");
 
     try {
-      const res = await fetch("/api/addData", {
+      const res = await fetch("/api/createBitacora", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,14 +56,9 @@ export default function EditBitacora({
 
       const data = await res.json();
 
-      if (res.ok) {
-        setResponseMessage(`Bitacora updated successfully: ${data.id}`);
-      } else {
-        setResponseMessage(`Error: ${data.error}`);
-      }
+      setResponseMessage(`La bitácora se actualizó correctamente`);
     } catch (error) {
-      console.log("----", error);
-      setResponseMessage("An error occurred while updating the bitacora.");
+      setResponseMessage("Ocurrió un error actualizando la bitacora.");
     } finally {
       setLoading(false);
     }
@@ -88,13 +74,9 @@ export default function EditBitacora({
       />
 
       <hr />
+      {/* Display the date, but don't allow changing it */}
       <div className="d-flex justify-content-end">
-        <input
-          type="date"
-          defaultValue={formatToYMD(Bitacora.date)}
-          className="d-inline border-none bg-transparent border-0 mx-3"
-          onChange={(e) => changeDate(e)}
-        />
+        <span className="d-inline mx-3">{Bitacora.date}</span>
       </div>
 
       <textarea
