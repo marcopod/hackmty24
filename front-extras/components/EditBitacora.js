@@ -33,8 +33,8 @@ export default function EditBitacora({bitacora}) {
             setBitacora({
               id: data.data._id, // Ensure the ID is set for updates
               title: data.data.title || "Untitled",
-              text: data.data.content || "",
-              date: formatToDMY(data.data.date),
+              content: data.data.content || "",
+              date: "15/09/2024",
             });
             setBitacora((prev) => {
               return { ...prev, title: data.data.title };
@@ -72,20 +72,53 @@ export default function EditBitacora({bitacora}) {
     });
   };
 
+  // const handleSaveBitacora = async () => {
+  //   setLoading(true);
+  //   setResponseMessage("");
+
+  //   try {
+  //     let emociones = await analyzeBitacora(Bitacora, user);
+
+  //     if (isExistingEntry) {
+  //       // Call the update function if it's an existing entry
+  //       await handleUpdateBitacora();
+  //     } else {
+  //       // Create a new entry
+  //       let save = await saveBitacora(Bitacora, user);
+  //       setResponseMessage("La bitácora se creó correctamente.");
+  //     }
+  //   } catch (error) {
+  //     setResponseMessage("Ocurrió un error guardando la bitácora.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const handleSaveBitacora = async () => {
     setLoading(true);
     setResponseMessage("");
-
+  
     try {
-      let emociones = await analyzeBitacora(Bitacora, user);
-
-      if (isExistingEntry) {
-        // Call the update function if it's an existing entry
-        await handleUpdateBitacora();
-      } else {
-        // Create a new entry
-        let save = await saveBitacora(Bitacora, user);
+      // Create a new entry by sending a POST request with Bitacora data
+      const response = await fetch("/api/createLog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: Bitacora.title,
+          date: "15/09/2024",
+          content: Bitacora.content,
+        }),
+        
+      });
+      
+  
+      if (response.ok) {
+        const result = await response.json();
         setResponseMessage("La bitácora se creó correctamente.");
+      } else {
+        const errorData = await response.json();
+        setResponseMessage(`Error: ${errorData.error}`);
       }
     } catch (error) {
       setResponseMessage("Ocurrió un error guardando la bitácora.");
@@ -93,7 +126,7 @@ export default function EditBitacora({bitacora}) {
       setLoading(false);
     }
   };
-
+  
 
   const handleUpdateBitacora = async () => {
     setLoading(true);
