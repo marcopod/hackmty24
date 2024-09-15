@@ -28,11 +28,11 @@ export default function Analisis() {
     
     return <>
         <TopMenu/>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', border: '0'}}>
             {
                 Theme != null  && 
                 <iframe 
-                    src={`https://appgraph-fp8hj5wlmf7mje4qfkwkja.streamlit.app/?embed=true&theme=ligth`} // Usar la variable theme en la URL${theme}
+                    src={`https://appgraph-fp8hj5wlmf7mje4qfkwkja.streamlit.app/?embed=true&theme=${Theme}`} // Usar la variable theme en la URL${theme}
                     style={{ width: '100%', height: '100%', border: 'none' }}>
                 </iframe>
             }
