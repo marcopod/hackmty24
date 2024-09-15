@@ -15,15 +15,18 @@ const formatToDMY = (dateStr) => {
 };
 
 export default function EditBitacora({
-  bitacora = {
-    title: "Bitacora 1",
-    text: "texto de prueba",
-    date: formatToDMY(new Date()), // Set the date to today's date in DD-MM-YYYY format
-  },
+  bitacora 
 }) {
   const { user, error, isLoading } = useUser()
   
-  const [Bitacora, setBitacora] = useState(bitacora);
+  const [Bitacora, setBitacora] = useState(bitacora != null ?  bitacora :
+    {
+    title: "",
+    text: "",
+    date: formatToDMY(new Date()),
+    id: ""
+    // Set the date to today's date in DD-MM-YYYY format
+  });
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
 
@@ -65,9 +68,11 @@ export default function EditBitacora({
     <div className="my-5 p-3">
       <input
         type="text"
+        placeholder="Comienza a escribir tu historia..."
         className="bitacora-title form-control bg-transparent border-0 fs-1 fw-bold"
         defaultValue={Bitacora.title}
         onChange={(e) => changeName(e)}
+
       />
 
       <hr />
@@ -78,6 +83,7 @@ export default function EditBitacora({
 
       <textarea
         defaultValue={Bitacora.text}
+        placeholder="¿Cómo estuvo tu día?"
         className="vh-50 my-3 rounded-2 p-4 w-100 bg-body-tertiary border-0 rounded-4"
         onChange={(e) => changeText(e)}
       />

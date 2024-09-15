@@ -34,3 +34,13 @@ export async function saveBitacora(Bitacora, User) {
       )
 
 }
+
+export async function getBitacora(date, User) {
+    return API.call("/api/getLog", "POST",
+        {
+          date: date,
+          id: User.sid
+        }
+      )
+
+}
