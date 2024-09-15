@@ -10,12 +10,13 @@ const API = {
             "Content-Type": "application/json",
             },
             body: JSON.stringify(data),
-          })
+          })    
           .then((response) => response.json())  
     }
 }
 
 export async function analyzeBitacora( Bitacora, User) {
+    console.log(JSON.stringify(Bitacora))
     return API.call("/api/apiGpt", "POST", {
         content: Bitacora.text, 
         id: User.sid
