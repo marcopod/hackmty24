@@ -32,9 +32,15 @@ export default function EditBitacora({bitacora}) {
           if (data && data.data) {
             setBitacora({
               id: data.data._id, // Ensure the ID is set for updates
-              title: data.data.name || "Untitled",
+              title: data.data.title || "Untitled",
               text: data.data.content || "",
               date: formatToDMY(data.data.date),
+            });
+            setBitacora((prev) => {
+              return { ...prev, title: data.data.title };
+            });
+            setBitacora((prev) => {
+              return { ...prev, content: data.data.content };
             });
             setIsExistingEntry(true); // Flag to indicate an existing entry
           }
@@ -102,7 +108,7 @@ export default function EditBitacora({bitacora}) {
         },
         body: JSON.stringify({
           id: Bitacora.id, // Ensure you're sending the ID
-          content: Bitacora.text, // Send the updated content
+          content: Bitacora.content, // Send the updated content
         }),
       });
 
