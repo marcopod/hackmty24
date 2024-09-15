@@ -52,7 +52,6 @@ export default withPageAuthRequired( function Home() {
         setLoading(false);
       }
     };
-
     fetchLogs();
   }, []);
 
